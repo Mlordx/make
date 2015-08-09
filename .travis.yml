@@ -1,8 +1,8 @@
 language: cpp
 
 os:
-  - osx
   - linux
+  - osx
 
 compiler:
   - clang
