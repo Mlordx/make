@@ -42,10 +42,10 @@ install:
         sudo update-alternatives --install
              /usr/bin/gfortran gfortran /usr/bin/gfortran-$GCC_VERSION 90;
 
-        sudo update-alternatives
-             --install /usr/bin/clang clang /usr/bin/clang-3.4 90;
-        sudo update-alternatives
-             --install /usr/bin/clang++ clang++ /usr/bin/clang++-3.4 90;
+        sudo update-alternatives --install
+             /usr/bin/clang clang /usr/bin/clang-$CLANG_VERSION 90;
+        sudo update-alternatives --install
+             /usr/bin/clang++ clang++ /usr/bin/clang++-$CLANG_VERSION 90;
       ;;
       osx)
         brew install bc;
