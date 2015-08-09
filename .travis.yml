@@ -18,29 +18,29 @@ before_install:
   # gcc/g++, clang/clang++ and gfortran
   - case "$TRAVIS_OS_NAME" in
       linux)
-        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-        sudo add-apt-repository -y ppa:h-rayflood/llvm
-        sudo apt-get update -qq
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test;
+        sudo add-apt-repository -y ppa:h-rayflood/llvm;
+        sudo apt-get update -qq;
       ;;
       osx)
-        brew update
+        brew update;
       ;;
     esac
 
 install:
   - case "$TRAVIS_OS_NAME" in
       linux)
-        sudo apt-get install -qq bc
+        sudo apt-get install -qq bc;
         sudo apt-get install -qq g++-$GCC_VERSION;
         sudo apt-get install -qq gfortran-$GCC_VERSION;
         sudo apt-get install -qq clang-$CLANG_VERSION;
 
         sudo update-alternatives --install
-             /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 90
+             /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 90;
         sudo update-alternatives --install
-             /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 90
+             /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 90;
         sudo update-alternatives --install
-             /usr/bin/gfortran gfortran /usr/bin/gfortran-$GCC_VERSION 90
+             /usr/bin/gfortran gfortran /usr/bin/gfortran-$GCC_VERSION 90;
 
         sudo update-alternatives
              --install /usr/bin/clang clang /usr/bin/clang-3.4 90;
@@ -48,16 +48,16 @@ install:
              --install /usr/bin/clang++ clang++ /usr/bin/clang++-3.4 90;
       ;;
       osx)
-        brew install bc
-        brew install gcc$GCC_VERSION
-        brew install gfortran$GCC_VERSION
-        brew install gfortran$GCC_VERSION
-        brew info llvm --with-clang --with-asan --HEAD
+        brew install bc;
+        brew install gcc$GCC_VERSION;
+        brew install gfortran$GCC_VERSION;
+        brew install gfortran$GCC_VERSION;
+        brew info llvm --with-clang --with-asan --HEAD;
 
-        alias gcc=gcc-$GCC_VERSION
-        alias g++=g++-$GCC_VERSION
-        alias clang=clang-$CLANG_VERSION
-        alias clang++=clang++-$CLANG_VERSION
+        alias gcc=gcc-$GCC_VERSION;
+        alias g++=g++-$GCC_VERSION;
+        alias clang=clang-$CLANG_VERSION;
+        alias clang++=clang++-$CLANG_VERSION;
       ;;
     esac
 
