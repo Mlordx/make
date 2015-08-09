@@ -11,7 +11,7 @@ compiler:
 env:
   global:
     - export GCC_VERSION=5
-    - export CLANG_VERSION=3.5
+    - export CLANG_VERSION=3.4
     - export FC=gfortran
 
 before_install:
