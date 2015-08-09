@@ -8,7 +8,7 @@ test "if \"$MAKE\" builds shared files with different flags" \
   "cp ../resources/greetings.h ." \
   "cp ../resources/greetings.c ." \
   "$MAKE standard" \
-  "$MAKE | grep greetings.o | wc -l | tr -d \' \'" \
+  "$MAKE | grep greetings.o | wc -l | sed 's/ //g'" \
   should_output "3"
 
 test "if \"$MAKE\" does not rebuild in 2nd recompilation" \
@@ -20,7 +20,7 @@ test "if \"$MAKE\" does not rebuild in 2nd recompilation" \
   "cp ../resources/greetings.c ." \
   "$MAKE standard" \
   "$MAKE" \
-  "$MAKE | grep \"is up to date\" | wc -l | tr -d \' \'" \
+  "$MAKE | grep \"is up to date\" | wc -l | sed 's/ //g'" \
   should_output "3"
 
 test "if \"$MAKE\" rebuilds only the touched main in 2nd recompilation" \
@@ -33,11 +33,11 @@ test "if \"$MAKE\" rebuilds only the touched main in 2nd recompilation" \
   "$MAKE standard" \
   "$MAKE" \
   "touch src/hello1.c" \
-  "$MAKE | grep \"is up to date\" | wc -l | tr -d \' \' >> results.txt" \
+  "$MAKE | grep \"is up to date\" | wc -l | sed 's/ //g' >> results.txt" \
   "touch src/hello2.c" \
-  "$MAKE | grep \"is up to date\" | wc -l | tr -d \' \' >> results.txt" \
+  "$MAKE | grep \"is up to date\" | wc -l | sed 's/ //g' >> results.txt" \
   "touch src/hello3.c" \
-  "$MAKE | grep \"is up to date\" | wc -l | tr -d \' \' >> results.txt" \
+  "$MAKE | grep \"is up to date\" | wc -l | sed 's/ //g' >> results.txt" \
   "cat results.txt" \
   should_output "2\n2\n2"
 
@@ -51,7 +51,7 @@ test "if \"$MAKE\" rebuilds the touched shared file in 2nd recompilation" \
   "$MAKE standard" \
   "$MAKE" \
   "touch src/greetings.c" \
-  "$MAKE | grep \"greetings.o\" | wc -l | tr -d \' \'" \
+  "$MAKE | grep \"greetings.o\" | wc -l | sed 's/ //g'" \
   should_output "3"
 
 test "if \"$MAKE\" rebuilds correctly in 2nd recompilation with args" \
@@ -64,16 +64,16 @@ test "if \"$MAKE\" rebuilds correctly in 2nd recompilation with args" \
   "$MAKE standard" \
   "$MAKE" \
   "$MAKE CPPFLAGS=-Dbla | grep \"is up to date\" \
-                        | wc -l | tr -d \' \' >> results.txt" \
+                        | wc -l | sed 's/ //g' >> results.txt" \
   "$MAKE" \
   "$MAKE CFLAGS=-Wall   | grep \"is up to date\" \
-                        | wc -l | tr -d \' \' >> results.txt" \
+                        | wc -l | sed 's/ //g' >> results.txt" \
   "$MAKE" \
   "$MAKE CXXFLAGS=-Wall | grep \"is up to date\" \
-                        | wc -l | tr -d \' \' >> results.txt" \
+                        | wc -l | sed 's/ //g' >> results.txt" \
   "$MAKE" \
   "$MAKE FFLAGS=-Wall   | grep \"is up to date\" \
-                        | wc -l | tr -d \' \' >> results.txt" \
+                        | wc -l | sed 's/ //g' >> results.txt" \
   "$MAKE" \
   "cat results.txt" \
   should_output "0\n0\n3\n3"
