@@ -5844,7 +5844,7 @@ endef
 # @brief Define which ostream should be used                           #
 #======================================================================#
 define select
-$(eval ostream = $(strip $(if $(call not-empty,$1),$1)))
+$(eval ostream = $(strip $(if $(call is-empty,$(wildcard $1*)),$1)))
 endef
 
 #======================================================================#
@@ -5852,8 +5852,8 @@ endef
 # @brief Add a text in the end of a ostream                            #
 #======================================================================#
 define cat
-$(quiet) $(call printf,"%b\n",$1,\
-                       $(if $(strip $(ostream)),>> $(ostream)))
+$(if $(strip $(ostream)),\
+    $(quiet) $(call printf,"%b\n",$1,>> $(ostream)))
 endef
 
 #======================================================================#
@@ -5861,7 +5861,8 @@ endef
 # @brief Remove text of the last line of a ostream                     #
 #======================================================================#
 define eat
-$(quiet) $(call sedln,'$$',$1,$(strip $(ostream)))
+$(if $(strip $(ostream)),\
+    $(quiet) $(call sedln,'$$',$1,$(strip $(ostream))))
 endef
 
 #======================================================================#
